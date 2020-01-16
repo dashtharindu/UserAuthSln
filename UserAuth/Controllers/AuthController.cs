@@ -30,6 +30,7 @@ namespace UserAuth.Controllers
             _config = config;
         }
 
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto regUser)
         {
@@ -60,6 +61,7 @@ namespace UserAuth.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody]UserForRegisterDto logUser)
         {
+
             logUser.Username = logUser.Username.ToLower();
 
             var result = await _repo.Login(logUser.Username,logUser.Password);
