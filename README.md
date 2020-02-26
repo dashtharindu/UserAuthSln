@@ -30,3 +30,8 @@ Application/Json
 https://localhost:44360/api/auth/protected
 Get
 pass bearer access token in header(returns after above login call)
+
+
+===========================================
+You may need to change SQL connection string and Token key (40 or above random characters recomended in production env)
+in appsettings.json file
