@@ -16,7 +16,6 @@ using UserAuth.Models;
 
 namespace UserAuth.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -28,6 +27,19 @@ namespace UserAuth.Controllers
         {
             _repo = repo;
             _config = config;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("API working successfully");
+        }
+
+        [Authorize]
+        [HttpGet("protected")]
+        public IActionResult protectedPath()
+        {
+            return Ok("SUCCESS!! \n-You may view this only with a valid bearer access token header");
         }
 
         [AllowAnonymous]
@@ -59,7 +71,7 @@ namespace UserAuth.Controllers
 
         [AllowAnonymous]
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody]UserForRegisterDto logUser)
+        public async Task<IActionResult> Login([FromBody]UserForLoginDto logUser)
         {
 
             logUser.Username = logUser.Username.ToLower();
